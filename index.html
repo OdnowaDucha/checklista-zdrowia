@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checklista Zdrowia - 90 dni</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e7f9f2;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+    }
+    .checklist {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+    button {
+      padding: 10px 15px;
+      margin-top: 20px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2ecc71;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button.reset {
+      background-color: #e74c3c;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>✅ Dzienna Checklista Zdrowia</h1>
+
+  <div class="checklist">
+    <label><input type="checkbox" id="check1"> 1. Szklanka wody z rana 🌄</label>
+    <label><input type="checkbox" id="check2"> 2. 3–5 min oddechu lub medytacji 🧘‍♀️</label>
+    <label><input type="checkbox" id="check3"> 3. Zdrowe śniadanie 🍳</label>
+    <label><input type="checkbox" id="check4"> 4. Aktywność fizyczna 🏃‍♂️</label>
+    <label><input type="checkbox" id="check5"> 5. Suplementacja lub aloes 💊</label>
+    <label><input type="checkbox" id="check6"> 6. Unikanie ekranu po 20:00 📵</label>
+    <label><input type="checkbox" id="check7"> 7. 3 rzeczy, za które jesteś wdzięczny 🙏</label>
+  </div>
+
+  <button onclick="saveProgress()">💾 Zapisz</button>
+  <button class="reset" onclick="resetChecklist()">🔁 Reset</button>
+
+  <div class="footer">
+    © 2025 – Checklista Zdrowia by Wojciech Duch
+  </div>
+
+  <script>
+    const totalItems = 7;
+
+    window.onload = function() {
+      for (let i = 1; i <= totalItems; i++) {
+        const saved = localStorage.getItem("check" + i);
+        if (saved === "true") document.getElementById("check" + i).checked = true;
+      }
+    };
+
+    function saveProgress() {
+      for (let i = 1; i <= totalItems; i++) {
+        localStorage.setItem("check" + i, document.getElementById("check" + i).checked);
+      }
+      alert("Zapisano postęp!");
+    }
+
+    function resetChecklist() {
+      for (let i = 1; i <= totalItems; i++) {
+        document.getElementById("check" + i).checked = false;
+        localStorage.removeItem("check" + i);
+      }
+      alert("Checklista wyczyszczona.");
+    }
+  </script>
+</body>
+</html>
